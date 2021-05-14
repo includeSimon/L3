@@ -7,7 +7,7 @@ using namespace std;
 class UI
 {
 public:
-  void run(Queue &q1, Queue &q2, Stack &stack);
+  bool run(Queue &q1, Queue &q2, Stack &stack);
 
 private:
   //push card to stack and return true if card is red

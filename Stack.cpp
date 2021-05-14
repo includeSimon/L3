@@ -4,7 +4,7 @@
 Stack::Stack(int _cap)
 {
   this->cap = _cap;
-  this->nodes = make_unique<Node[]>(_cap);
+  this->nodes = new Node[_cap];
   this->head = -1;
   this->size = 0;
   nodes[cap - 1].next = -1; //trebuie sa specificam sfarsitul stivei
@@ -37,37 +37,39 @@ bool Stack::add(const TElem &elem)
   return true;
 }
 
-vector<TElem> Stack::empty()
+TElem *Stack::empty(int &_size)
 {
   if (size == 0)
     throw invalid_argument("Stiva deja este goala!!");
-  
-  vector<TElem> elems;
+
+  TElem *elems = new TElem[size];
   int index = head, i = 0;
 
   while (index != -1)
   {
     TElem elem = nodes[index].info;
-    elems.push_back(elem);
+    elems[i++] = elem;
     index = nodes[index].prev;
   }
 
   //eliberam stack-ul
   this->head = -1;
   nodes[cap - 1].next = -1;
-  for (int i = 0; i < cap - 1; i++)
+
+  for (i = 0; i < cap - 1; i++)
   {
     nodes[i].next = i + 1;
     nodes[i].prev = i - 1;
   }
 
   this->firstEmpty = 0;
-
+  _size = size;
   size = 0;
   return elems;
 }
 
-bool Stack::isEmpty(){
+bool Stack::isEmpty()
+{
   return size == 0;
 }
 

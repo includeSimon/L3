@@ -1,5 +1,6 @@
 #include "Stack.h"
 #include "Queue.h"
+//#include "Test.h"
 #include "presentation.h"
 #include <iostream>
 #include <memory>
@@ -7,14 +8,8 @@ using namespace std;
 
 int main()
 {
-  // Queue q1(6);
-
-  // for (int i = 1; i <= 6; i++)
-  //   q1.add(i);
-
-  // cout << "Parcurgere normala: \n";
-  // q1.show();
-
+  // Test t;
+  // t.test();
 
   int n;
   cout << "Introduceti un numar par de elemente: \n";
@@ -62,9 +57,9 @@ int main()
 }
 
 /*
-  q1:     0 1 
-  stack:  0 1
-  q2:     0 0
+  q1:   0 2 3   
+  stack:  
+  q2:   0 2 3  
 
   Cazurile in care crapa:
   0 0

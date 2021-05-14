@@ -13,7 +13,7 @@ public:
   ~Queue(){}; //nu avem nevoie de destructor deoarece folosim smart pointers
 
   bool add(const TElem &elem);
-  void addFromStack(const vector<TElem> &);
+  void addFromStack(TElem *vec, int _size);
   bool deleteElem(const TElem &elem);
   bool isFull();
   bool isEmpty();
@@ -22,11 +22,12 @@ public:
 
   //metodele de afisare
   void show();
+  void showElems();
   void showNext();
 
 private:
-  unique_ptr<TElem[]> elems;
-  unique_ptr<TElem[]> next;
+  TElem *elems;
+  TElem *next;
   int cap;
   int head;
   int firstEmpty;

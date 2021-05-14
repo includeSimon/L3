@@ -18,7 +18,7 @@ class Stack
 public:
   Stack(int _elem);
   bool add(const TElem &elem);
-  vector<TElem> empty();  //returneaza un vector de elemente si sterge elementele
+  TElem* empty(int &_size);  //returneaza un vector de elemente si sterge elementele
   void show();
   bool isEmpty();
 
@@ -28,7 +28,7 @@ public:
   void showPrev();
 
 private:
-  unique_ptr<Node[]> nodes;
+  Node *nodes;
   int cap;
   int head;
   int tail;

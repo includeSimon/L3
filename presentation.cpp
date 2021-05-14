@@ -1,6 +1,6 @@
 #include "presentation.h"
 
-void UI::run(Queue &q1, Queue &q2, Stack &stack)
+bool UI::run(Queue &q1, Queue &q2, Stack &stack)
 {
   while (q1.isFull() == false && q2.isFull() == false)
   {
@@ -8,13 +8,13 @@ void UI::run(Queue &q1, Queue &q2, Stack &stack)
     if (q1.isEmpty())
     {
       cout << "Jucatorul 1 a ramas fara carti. Deci jucator 1 castiga!";
-      exit(0);
+      return true;
     }
 
     if (q2.isEmpty())
     {
       cout << "Jucatorul 2 a ramas fara carti. Deci jucator 2 castiga!";
-      exit(0);
+      return false;
     }
 
     //debug
@@ -39,8 +39,10 @@ void UI::run(Queue &q1, Queue &q2, Stack &stack)
     {
       cout << "Al doilea jucator preia cartile!\n";
       cout << "Cartile jucatorului 2: ";
+      int size;
+      TElem *vec = stack.empty(size);
+      q2.addFromStack(vec,size);
       q2.show();
-      q2.addFromStack(stack.empty());
       cout << endl;
     }
     //second player move
@@ -52,18 +54,21 @@ void UI::run(Queue &q1, Queue &q2, Stack &stack)
     {
       cout << "Primul jucator preia cartile!\n";
       cout << "Cartile jucatorului 1: ";
-      q1.addFromStack(stack.empty());
+      int size;
+      TElem *vec = stack.empty(size);
+      q1.addFromStack(vec, size);
       q1.show();
       cout << endl;
     }
   }
 
   //daca am ajuns aici, inseamna ca una dintre cozi s-a umplut
-  if (q1.isFull())
+  if (q1.isFull()){
     cout << "Primul jucator a castigat meciul!";
-
-  else
+    return true;
+  }
     cout << "Al doilea jucator a castigat meciul!";
+    return false;
 }
 
 bool UI::pushCard(Queue &q, Stack &stack, int nr)

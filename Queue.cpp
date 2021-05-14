@@ -6,8 +6,8 @@ Queue::Queue(const int &_cap)
 {
   this->cap = _cap;
   this->size = 0;
-  this->elems = make_unique<TElem[]>(_cap);
-  this->next = make_unique<TElem[]>(_cap);
+  this->elems = new TElem[_cap];
+  this->next = new TElem[_cap];
   this->head = -1;
   for (int i = 0; i < this->cap - 1; i++)
     this->next[i] = i + 1;
@@ -32,13 +32,13 @@ bool Queue::add(const TElem &elem)
   return true;
 }
 
-void Queue::addFromStack(const vector<TElem> &vec)
+void Queue::addFromStack(TElem *vec, int _size)
 {
-  if (vec.size() + size > cap)
+  if (_size + size > cap)
     throw std::invalid_argument("Dimensiunea cozii depasita!!");
 
-  for (TElem elem : vec)
-    add(elem);
+  for (int i = 0; i < _size; i++)
+    add(vec[i]);
 }
 
 bool Queue::deleteElem(const TElem &elem)
@@ -122,4 +122,11 @@ void Queue::showNext()
     cout << next[i] << " ";
 
   cout << "head: " << head << endl;
+}
+
+void Queue::showElems(){
+  for (int i = 0; i < size; i++)
+    cout << elems[i] << " ";
+
+  cout << endl;
 }
